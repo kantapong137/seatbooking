@@ -37,7 +37,7 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
   List<List<Seat>?> seats = [];
   String selectedSeat = ''; // Store the currently selected seat
   final seatApi = SeatApi();
-  late Venue venue;
+  Venue? venue;
   @override
   void initState() {
     super.initState();
@@ -60,6 +60,9 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
     if (fetchedSeats != null) {
       setState(() {
         seats = fetchedSeats;
+        // print(seats[0]![0].seatNumber);
+        // print(seats[0]![1].seatNumber);
+        // print(seats[0]![2].seatNumber);
       });
     }
   }
@@ -95,15 +98,15 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
               child: Column(
                 children: [
                   Text(
-                    'สถานที่จัดงาน: ${venue.name}',
-                    style: TextStyle(
+                    'สถานที่จัดงาน: ${venue?.name}',
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    'ความจุทั้งหมด: ${venue.capacity} ที่',
-                    style: TextStyle(
+                    'ความจุทั้งหมด: ${venue?.capacity} ที่',
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
@@ -115,14 +118,13 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
             if (seats.isEmpty)
               const CircularProgressIndicator()
             else
-              Padding(
-                padding: const EdgeInsets.all(30.0),
-                child: Expanded(
-                  flex: 1,
+              Expanded(
+                flex: 1,
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
                   child: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: seats[0]!.length,
-                      // childAspectRatio: 1.0,
                       childAspectRatio: (20 / 20),
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
@@ -134,7 +136,6 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
                       final i = index ~/ seats[0]!.length;
                       final j = index % seats[0]!.length;
                       final seat = seats[i]![j];
-
                       Color backgroundColor;
                       if (seat.status == 'available') {
                         if (seat.seatNumber == selectedSeat) {
@@ -236,24 +237,6 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
                     ),
             ),
             Container(padding: const EdgeInsets.only(bottom: 10)),
-            // Column(
-            //   children: [
-            //     Text(
-            //       'Selected Seat: $selectedSeat',
-            //       style: const TextStyle(
-            //         fontSize: 18,
-            //         fontWeight: FontWeight.bold,
-            //       ),
-            //     ),
-            //     // ElevatedButton(
-            //     //   onPressed: () {
-            //     //     selectedSeat = '';
-            //     //     setState(() {});
-            //     //   },
-            //     //   child: Text('Clear Selection'),
-            //     // ),
-            //   ],
-            // ),
           ],
         ),
       ),
