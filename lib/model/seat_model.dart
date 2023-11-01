@@ -1,3 +1,10 @@
+class Venue {
+  final String name;
+  final int capacity;
+
+  Venue({required this.name, required this.capacity});
+}
+
 class Seat {
   final String seatNumber;
   final String status;

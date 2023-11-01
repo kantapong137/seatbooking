@@ -37,11 +37,22 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
   List<List<Seat>?> seats = [];
   String selectedSeat = ''; // Store the currently selected seat
   final seatApi = SeatApi();
-
+  late Venue venue;
   @override
   void initState() {
     super.initState();
+    fetchVenueData();
     fetchSeats();
+  }
+
+  void fetchVenueData() async {
+    final venueData = await seatApi.fetchVenueData();
+    setState(() {
+      venue = Venue(
+        name: venueData["name"],
+        capacity: venueData["capacity"],
+      );
+    });
   }
 
   void fetchSeats() async {
@@ -79,6 +90,27 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
         padding: const EdgeInsets.all(10.0),
         child: Column(
           children: [
+            Container(
+              padding: const EdgeInsets.only(bottom: 0),
+              child: Column(
+                children: [
+                  Text(
+                    'สถานที่จัดงาน: ${venue.name}',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'ความจุทั้งหมด: ${venue.capacity} ที่',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
             Container(padding: const EdgeInsets.only(top: 20)),
             if (seats.isEmpty)
               const CircularProgressIndicator()
@@ -203,7 +235,7 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
                       ),
                     ),
             ),
-            Container(padding: const EdgeInsets.only(bottom: 50)),
+            Container(padding: const EdgeInsets.only(bottom: 10)),
             // Column(
             //   children: [
             //     Text(
