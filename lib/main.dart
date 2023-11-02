@@ -35,7 +35,7 @@ class SeatReservationApp extends StatefulWidget {
 
 class _SeatReservationAppState extends State<SeatReservationApp> {
   List<List<Seat>?> seats = [];
-  String selectedSeat = ''; // Store the currently selected seat
+  String selectedSeat = ''; 
   final seatApi = SeatApi();
   Venue? venue;
   @override

@@ -4,8 +4,7 @@ import 'dart:convert';
 import '../model/seat_model.dart';
 
 class SeatApi {
-  final String apiUrl =
-      'https://xokthilat.github.io/json/seating.json'; // Replace with your API endpoint
+  final String apiUrl = 'https://xokthilat.github.io/json/seating.json';
 
   Future<Map<String, dynamic>> fetchVenueData() async {
     final response = await http.get(Uri.parse(apiUrl));
