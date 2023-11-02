@@ -81,11 +81,15 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: const Text(
-          'เลือกที่นั่ง',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
+        title: Align(
+          alignment: const AlignmentDirectional(0.00, 0.00),
+          child: Text(
+            'เลือกที่นั่ง',
+            style: GoogleFonts.getFont(
+              'Kanit',
+              color: Colors.black,
+              fontSize: 24,
+            ),
           ),
         ),
       ),
@@ -99,16 +103,18 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
                 children: [
                   Text(
                     'สถานที่จัดงาน: ${venue?.name}',
-                    style: const TextStyle(
+                    style: GoogleFonts.getFont(
+                      'Kanit',
+                      color: Colors.black,
                       fontSize: 14,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     'ความจุทั้งหมด: ${venue?.capacity} ที่',
-                    style: const TextStyle(
+                    style: GoogleFonts.getFont(
+                      'Kanit',
+                      color: Colors.black,
                       fontSize: 14,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -165,9 +171,10 @@ class _SeatReservationAppState extends State<SeatReservationApp> {
                               seat.status == 'available'
                                   ? seat.seatNumber
                                   : ' ',
-                              style: const TextStyle(
+                              style: GoogleFonts.getFont(
+                                'Kanit',
                                 color: Colors.black,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
                               ),
                             ),
                           ),
