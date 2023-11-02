@@ -1,4 +1,4 @@
 # seatbooking
  
-flutter pub get
+flutter pub get \n
 flutter run -d chrome
